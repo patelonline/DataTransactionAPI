@@ -62,7 +62,7 @@ namespace DataTransaction
                     db.Entry(B).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     db.OrderBooks.Where(x => x.IS_Order_Closed == true).ToList().ForEach(T => db.History_OrderBook.Add(ConvertOrderBook(T)));
-                    db.Transactions
+                    //db.Transactions
                     //db.OrderBooks.Where(x => x.IS_Order_Closed == false).ToList().ForEach(T => db.History_OrderBook.Add(ConvertOrderBook(T, true)));
 
                 }
