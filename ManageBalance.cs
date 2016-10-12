@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataTransaction
 {
-    class ManageBalance
+    public class ManageBalance
     {
         //ef_manager_newEntities db = new ef_manager_newEntities();
         //public bool addBalance(Balance bal)
@@ -23,18 +23,18 @@ namespace DataTransaction
         //        return false;
         //    }
         //}
-        public Balance GetByID(int? UserId)
+        public static decimal? GetByID(int? UserId)
         {
             if (UserId == null)
             {
                 return null;
             }
-            Balance Result = null;
+            decimal? Result = null;
             try
             {
                 using (ef_manager_newEntities db = new ef_manager_newEntities())
                 {
-                    decimal d = (db.Balances.Where(x => x.User_ID == UserId).FirstOrDefault().Balance1 - db.FrozenBalances.Where(x => x.User_ID == UserId && x.IsReleased == false).Sum(x => x.Balance)) + db.Transactions.Where(x => x.User_ID == UserId).Sum(x => x.Amount);
+                    Result = (db.Balances.Where(x => x.User_ID == UserId).FirstOrDefault().Balance1 - db.FrozenBalances.Where(x => x.User_ID == UserId && x.IsReleased == false).Sum(x => x.Balance)) + db.Transactions.Where(x => x.User_ID == UserId).Sum(x => x.Amount);
                     //Result = new Balance() { Balance1 = d ,  };
                     //baki
                 }
